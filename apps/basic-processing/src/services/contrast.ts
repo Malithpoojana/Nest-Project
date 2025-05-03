@@ -13,12 +13,16 @@ export class ContrastService {
     const factor = contrast + 1;
 
     for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        for (let c = 0; c < channels; c++) {
-          const pixelIndex = (y * width + x) * channels + c;
-          const pixel = imageData[pixelIndex];
-          const newValue = factor * (pixel - 128) + 128;
-          result[pixelIndex] = Math.max(0, Math.min(newValue, 255));
+  for (let x = 0; x < width; x++) {
+    for (let c = 0; c < channels; c++) {
+      const pixelIndex = (y * width + x) * channels + c;
+      const pixel = imageData[pixelIndex];
+      const newValue = factor * (pixel - 128) + 128;
+      result[pixelIndex] = Math.max(0, Math.min(Math.round(newValue), 255));
+    }
+  }
+}
+
         }
       }
     }
