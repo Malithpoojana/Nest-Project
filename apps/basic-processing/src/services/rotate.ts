@@ -10,9 +10,9 @@ export class RotateService {
     inputBuffer: Buffer,
     width: number,
     height: number,
+    channels: number,
     angle: number
   ): Buffer {
-    const channels = 3; // RGB channels
     const outputBuffer = Buffer.alloc(width * height * channels);
 
     // Convert degrees to radians
@@ -33,7 +33,6 @@ export class RotateService {
           centerY + dx * Math.sin(radian) + dy * Math.cos(radian)
         );
 
-        // Copy pixel if within bounds
         if (
           rotatedX >= 0 &&
           rotatedX < width &&
@@ -72,23 +71,29 @@ export class RotateService {
         fs.mkdirSync(outputDir, { recursive: true });
       }
 
-      // Load image and metadata
       const image = sharp(imagePath);
       const metadata = await image.metadata();
-      const { width, height } = metadata;
+      const { width, height, channels } = metadata;
 
-      // Extract raw RGB pixel data
+      if (!width || !height || !channels) {
+        throw new Error('Unable to retrieve image dimensions or channels');
+      }
+
       const rawData = await image.raw().toBuffer();
 
-      // Rotate pixel buffer
-      const rotatedBuffer = this.rotatePixels(rawData, width!, height!, angle);
+      const rotatedBuffer = this.rotatePixels(
+        rawData,
+        width,
+        height,
+        channels,
+        angle
+      );
 
-      // Save the rotated image
       await sharp(rotatedBuffer, {
         raw: {
-          width: width!,
-          height: height!,
-          channels: 3,
+          width,
+          height,
+          channels,
         },
       })
         .png()
