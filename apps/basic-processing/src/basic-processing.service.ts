@@ -5,7 +5,7 @@ import { GreyscaleService } from './services/greyscale';
 import { ContrastService } from './services/contrast';
 import { NegativeService } from './services/negative';
 import { SharpenService } from './services/sharpen';
-import { EmbossService } from './services/embossing';
+import { EmbossService } from './services/emboss';
 import { RotateService } from './services/rotate';
 
 @Injectable()

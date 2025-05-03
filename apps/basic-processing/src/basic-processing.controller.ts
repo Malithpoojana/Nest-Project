@@ -5,7 +5,7 @@ import { BasicProcessingService } from './basic-processing.service';
 
 @Controller()
 export class BasicProcessingController {
-  constructor(private readonly basicProcessingService: BasicProcessingService) { }
+  constructor(private readonly basicProcessingService: BasicProcessingService) {}
 
   @EventPattern({ cmd: 'resize_image' })
   async handleResize(data: { imagePath: string; width: number; height: number }) {
@@ -20,9 +20,9 @@ export class BasicProcessingController {
   }
 
   @EventPattern({ cmd: 'create_negative' })
-  async handleNegative(imagePath: string) {
+  async handleNegative(data: { imagePath: string }) {
     console.log('Received image for negative creation');
-    return await this.basicProcessingService.createNegative(imagePath);
+    return await this.basicProcessingService.createNegative(data.imagePath);
   }
 
   @EventPattern({ cmd: 'adjust_contrast' })
@@ -38,14 +38,14 @@ export class BasicProcessingController {
   }
 
   @EventPattern({ cmd: 'sharpen_image' })
-  async handleSharpen(imagePath: string) {
+  async handleSharpen(data: { imagePath: string }) {
     console.log('Received image for sharpening');
-    return await this.basicProcessingService.sharpenImage(imagePath);
+    return await this.basicProcessingService.sharpenImage(data.imagePath);
   }
 
   @EventPattern({ cmd: 'emboss_image' })
-  async handleEmboss(imagePath: string) {
+  async handleEmboss(data: { imagePath: string }) {
     console.log('Received image for embossing');
-    return await this.basicProcessingService.embossImage(imagePath);
+    return await this.basicProcessingService.embossImage(data.imagePath);
   }
 }
