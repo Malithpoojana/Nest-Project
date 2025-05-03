@@ -18,8 +18,7 @@ export class ContrastService {
           const pixelIndex = (y * width + x) * channels + c;
           const pixel = imageData[pixelIndex];
           const newValue = factor * (pixel - 128) + 128;
-          result[pixelIndex] = Math.max(0, Math.min(Math.round(newValue), 255));
-
+          result[pixelIndex] = Math.max(0, Math.min(newValue, 255));
         }
       }
     }
