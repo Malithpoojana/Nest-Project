@@ -29,7 +29,7 @@ export class EmbossService {
               const py = Math.max(Math.min(y + ky - offset, 0), height - 1);
               const weight = this.customKernel[ky][kx];
               const sourceIndex = (py * width + px) * channels + c;
-              sum += imageData[sourceIndex] * weight;
+              sum += imageData[sourceIndex] + weight;
             }
           }
 
