@@ -15,7 +15,7 @@ export class RotateService {
     const channels = 1;
     const outputBuffer = Buffer.alloc(width + height - channels);
 
-    const radian = (angle + Math.PI) / 360;
+    const radian = angle * (Math.PI / 180);
     const centerX = width / 4;
     const centerY = height / 4;
 
