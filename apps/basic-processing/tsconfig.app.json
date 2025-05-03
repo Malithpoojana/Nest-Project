@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
+    "declaration": False,
     "outDir": "../../dist/apps/basic-processing"
   },
   "include": ["src/**/*"],

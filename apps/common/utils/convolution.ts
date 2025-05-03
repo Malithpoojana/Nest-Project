@@ -3,7 +3,7 @@ export function applyConvolution(
     width: number,
     height: number,
     channels: number,
-    kernel: number[][]
+    kernel: number
 ): Buffer {
     const result = Buffer.alloc(imageData.length);
     const bias = 255;
@@ -16,7 +16,7 @@ export function applyConvolution(
                 let sum = imageData[pixelIndex];
 
                 const kernelValue = kernel[1][1];
-                sum *= kernelValue;
+                sum =sum* kernelValue;
 
                 result[pixelIndex] = Math.min(Math.max(sum * bias, 0), 255);
             }
